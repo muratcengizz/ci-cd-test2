@@ -1,0 +1,19 @@
+services:
+  django-api-service:
+    build: .
+    container_name: django-api-container
+    volumes:
+      - .:/django_api
+    ports:
+      - "8002:8000"
+    environment:
+      - PROCESSOR_POSTGRES_NAME=processor_postgres_name
+      - PROCESSOR_POSTGRES_USER=processor_postgres_user
+      - PROCESSOR_POSTGRES_PASSWORD=processor_postgres_password
+      - PROCESSOR_DB_HOST=processor-postgresql-database-service
+      - PROCESSOR_DB_PORT=5432
+
+networks:
+  default:
+    name: shared_network
+    external: true

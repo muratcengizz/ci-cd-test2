@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Processor Project</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        table th, table td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        table th {
+            background-color: #007BFF;
+            color: white;
+        }
+
+        table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>Collector Data</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>User ID</th>
+                <th>Page Viewed</th>
+                <th>Time Spent (seconds)</th>
+                <th>Timestamp</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in rows %}
+            <tr>               
+                    {% for data in row %}
+                        <td>{{ data }}</td>
+                    {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <h4>{{ message }}</h4>
+    <h3>Processed Data:</h3>
+    <h4>Time spent average is {{ average }} in each page.</h4>
+    <h4>Most viewed page is {{ most_viewed }}.</h4>
+    <h4><a href="http://127.0.0.1:8000">Click</a> for the Collector Project.</h4>
+</body>
+</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Browsing Data Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+            position: relative;
+        }
+
+        .form-container {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        .form-container h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+            color: #333;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+
+        .form-group input:focus {
+            border-color: #007BFF;
+            outline: none;
+        }
+
+        .form-container button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .form-container button:hover {
+            background-color: #0056b3;
+        }
+
+        .message-box {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #007BFF;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            font-size: 0.9em;
+            display: none;
+        }
+
+        .message-box.show {
+            display: block;
+        }
+
+        .additional-content {
+            max-width: 400px;
+            width: 100%;
+            background-color: #e9ecef;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 1em;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h1>Browsing Data Form</h1>
+        <form action="" method="post">
+            {% csrf_token %}
+
+            <div class="form-group">
+                <label for="page_viewed">Page Viewed</label>
+                <input type="text" id="page_viewed" name="page_viewed" placeholder="Enter Page Name" required>
+            </div>
+            <div class="form-group">
+                <label for="time_spent">Time Spent (seconds)</label>
+                <input type="number" step="0.01" id="time_spent" name="time_spent" placeholder="Enter Time in Seconds" required>
+            </div>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <div class="additional-content">
+        <p><a href="http://127.0.0.1:8001">Click for the Processor Project.</a></p>
+    </div>
+    
+    <div class="message-box" id="messageBox">{{ message }}</div>
+    <script>
+        // Example to show the message box
+        function showMessage() {
+            const messageBox = document.getElementById('messageBox');
+            messageBox.classList.add('show');
+            
+            // Hide the message box after 3 seconds
+            setTimeout(() => {
+                messageBox.classList.remove('show');
+            }, 3000);
+        }
+
+        // Simulate message box display on form submission
+        document.querySelector('form').addEventListener('submit', (e) => {
+            //e.preventDefault(); // Prevent actual form submission for demo
+            showMessage();
+        });
+    </script>
+</body>
+</html>

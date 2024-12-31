@@ -1,0 +1,37 @@
+services:
+  processor-django-service:
+    build: .
+    container_name: processor-django-container
+    volumes:
+      - ".:/django_processor_project"
+    ports:
+      - "8001:8000"
+    environment:
+      - PROCESSOR_POSTGRES_NAME=processor_postgres_name
+      - PROCESSOR_POSTGRES_USER=processor_postgres_user
+      - PROCESSOR_POSTGRES_PASSWORD=processor_postgres_password
+      - PROCESSOR_DB_HOST=processor-postgresql-database-service
+      - PROCESSOR_DB_PORT=5432
+    depends_on:
+      processor-postgresql-database-service:
+        condition: service_healthy
+
+  processor-postgresql-database-service:
+    image: postgres:13
+    container_name: processor-database-container
+    environment:
+      - POSTGRES_USER=processor_postgres_user
+      - POSTGRES_PASSWORD=processor_postgres_password
+      - POSTGRES_DB=processor_postgres_name
+    ports:
+      - "5433:5432"
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "processor_postgres_user", "-d", processor_postgres_name]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+networks:
+  default:
+    name: shared_network
+    external: true
