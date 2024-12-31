@@ -43,6 +43,7 @@ jobs:
       - name: Test Django Collector
         working-directory: ./django_collector
         run: |
+          docker-compose build
           docker-compose up -d
           docker exec -i django-collector-container python manage.py test
           docker-compose down
@@ -50,6 +51,7 @@ jobs:
       - name: Test Django Processor
         working-directory: ./django_processor
         run: |
+          docker-compose build
           docker-compose up -d
           docker exec -i processor-django-container python manage.py test
           docker-compose down
@@ -57,6 +59,7 @@ jobs:
       - name: Test Django API
         working-directory: ./django_api
         run: |
+          docker-compose build
           docker-compose up -d
           docker exec -i django-api-container python manage.py test
           docker-compose down
