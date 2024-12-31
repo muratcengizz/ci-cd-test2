@@ -48,14 +48,14 @@ jobs:
           docker-compose down
       
       - name: Test Django Processor
-        working_directory: ./django_processor
+        working-directory: ./django_processor
         run: |
           docker-compose up -d
           docker exec -i processor-django-container python manage.py test
           docker-compose down
       
       - name: Test Django API
-        working_directory: ./django_api
+        working-directory: ./django_api
         run: |
           docker-compose up -d
           docker exec -i django-api-container python manage.py test
